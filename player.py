@@ -45,4 +45,7 @@ class Player():
             else: # score at 1000+
                 self.on_board = True
                 return True
+        else: 
+            #already on board
+            return True
             

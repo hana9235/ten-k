@@ -4,15 +4,6 @@ from die import *
 from player import *
 from collections import Counter
 
-# someone has to hit 1000 in a turn to get out, set their on_board = true
-# three of one number = number * 100 (same for 4)
-# every single 1 = 100
-# every single 5 = 50
-# no 1's, 5's, or trios, bust, player's current turn = 0, next player
-# after every roll, ask to stop
-    # if stopping, current score added to total score
-    # if rolling again, ask if anything held (number dice)
-# if all 6 dice have been held/score is still valid, keep current total, unhold all dice, keep going
 
 class Game():
 
@@ -71,7 +62,8 @@ class Game():
                     for d in self.p.dice:
                       print(" {0}".format(d.get_value()), end = " ")
                     
-                    dice_to_hold = input("\nWhich dice do you want to hold? ")
+                    dice_to_hold = input("\nWhich dice do you want to hold? \n" + \
+                                            "Enter the number (D1 = 1): ")
                     dice_to_hold.strip()
                     holding = [int(index) - 1 for index in dice_to_hold.split(" ")]
                     
@@ -90,7 +82,7 @@ class Game():
                 self.p.add_to_score(turn_total)
 
             self.p.reset_dice()
-            if self.p.get_total_score() >= GAME_LIMIT:
+            if self.p.get_total_score() >= self.GAME_LIMIT:
                 self.game_won = True
                 print("YOU WIN!")
             self.show_score()
