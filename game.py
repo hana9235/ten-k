@@ -121,7 +121,8 @@ class Game():
             scoring_dice = 6
             return sum, scoring_dice
             
-        if len(less_than_three) == 3 and len(values) == 6:  
+        if len(less_than_three) == 3 and len(rolled_dice) == 6:  
+            print("POTENTIAL FOR SHOES")
             # rolled all 6, only three faces showed up
             # check if three pairs
             # assume true until proved wrong
@@ -130,25 +131,32 @@ class Game():
                 if counted_values[d] != 2:
                     # if one of them isn't a pair, three-pair is bust
                     is_three_pair = False
+                    print("BUST FOR SHOES")
                     
             if is_three_pair: # got to here, must be true
                 sum = 1500
                 scoring_dice = 6
+                print("SCORED SHOES")
                 return sum, scoring_dice
             
         # three or more of a number
         for val in at_least_three:
-            # 1 is a special case, three 1's = 1000
-            if val == 1:
-                sum += 1000
-            else:
-                if counted_values[val] > 3:
-                    scoring_dice += counted_values[val]
+            if counted_values[val] > 3:
+                if val == 1:  
+                    #special case, 3 1's = 1000
+                    sum += (1000) * (2 * (counted_values[val] - 3))
+                else:  # not 1's
                     # the first 3 are still the value * 100, every addition value doubles score
                     sum += (val * 100) * (2 * (counted_values[val] - 3))
+                scoring_dice += counted_values[val]
+            else:
+                # 1 is a special case, three 1's = 1000
+                if val == 1:
+                    sum += 1000
                 else:
-                    scoring_dice += counted_values[val]
                     sum += (val * 100)
+                
+                scoring_dice += counted_values[val]
                     
         # one or two of a number, only 1 and 5 count
         for val in less_than_three:
