@@ -43,6 +43,7 @@ class Game():
         turn_total = turn_total
         self.p.roll_dice()
         roll_val, scoring_dice = self.calculate_roll_value()
+        print("Score for this roll: ", roll_val)
         print("Total for this turn so far: ", turn_total)
         if roll_val == 0:
             print("Bust!")
@@ -113,16 +114,13 @@ class Game():
         
         at_least_three = [d for d in counted_values if counted_values[d] > 2]
         less_than_three = [d for d in counted_values if counted_values[d] < 3]
-        print("\n AT LEAST THREE = ", at_least_three)
-        print("\n LESS THAN THREE = " , less_than_three)
         
         if len(less_than_three) == 6:  # rolled one of each, a straight
             sum = 1500
             scoring_dice = 6
             return sum, scoring_dice
             
-        if len(less_than_three) == 3 and len(rolled_dice) == 6:  
-            print("POTENTIAL FOR SHOES")
+        if len(less_than_three) == 3 and len(at_least_three) == 0 and len(rolled_dice) == 6:  
             # rolled all 6, only three faces showed up
             # check if three pairs
             # assume true until proved wrong
@@ -131,12 +129,10 @@ class Game():
                 if counted_values[d] != 2:
                     # if one of them isn't a pair, three-pair is bust
                     is_three_pair = False
-                    print("BUST FOR SHOES")
                     
             if is_three_pair: # got to here, must be true
                 sum = 1500
                 scoring_dice = 6
-                print("SCORED SHOES")
                 return sum, scoring_dice
             
         # three or more of a number
@@ -166,7 +162,6 @@ class Game():
             elif val == 5:
                 scoring_dice += counted_values[val]
                 sum += 50 * counted_values[val]
-        print("Score for this roll: ", sum)
         return sum, scoring_dice
         
     def show_score(self):
