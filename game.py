@@ -16,6 +16,8 @@ from collections import Counter
 
 class Game():
 
+    GAME_LIMIT = 10000
+
     def __init__(self, player_list):
         self.game_won = False
         self.players = player_list
@@ -88,7 +90,7 @@ class Game():
                 self.p.add_to_score(turn_total)
 
             self.p.reset_dice()
-            if self.p.get_total_score() >= 10000:
+            if self.p.get_total_score() >= GAME_LIMIT:
                 self.game_won = True
                 print("YOU WIN!")
             self.show_score()
