@@ -17,5 +17,7 @@ Scoring:
     - 1's are worth 100 each, 5's are worth 50 each.
     
   Special cases:
-  - Three 1's are worth 1000 points.  Four are worth 2000 points.  
-  - # Three-pair and 1-6 Straight have yet to be implemented.
+  - Three 1's are worth 1000 points.  Four are worth 2000 points, and so on.
+  - Three pairs (i.e., 1 1 3 3 6 6) are worth 1500 points.
+  - A 1-6 straight is worth 1500 points
+
