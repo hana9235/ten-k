@@ -57,14 +57,12 @@ public class Game {
             int y_or_n = go_again.compareTo("y");
             
             if(y_or_n == 0) { // player said yes
-                turn_total += roll_score;
                 if(scoring_dice == 6) {
                     // all dice score some value, reset and reroll all
                     System.out.println("resetting dice...");
                     p.reset_dice();
                 }
                 else {
-                    System.out.println("in else");
                     // at least one didn't score, so offer to hold the ones that did
                     System.out.print("Hold any dice? (y/n): ");
                     String holding = sc.next().toLowerCase();
@@ -108,7 +106,7 @@ public class Game {
                     }
                     else {
                         // didn't hold any scoring dice, so lose their point values
-                        continue;
+                        turn_total += 0;
                     }
                 }
             }
